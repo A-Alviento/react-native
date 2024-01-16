@@ -1,17 +1,25 @@
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import HomeScreen from "./src/screens/HomeScreen";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import HomeScreen from './src/screens/HomeScreen';
 import ComponentsScreen from './src/screens/ComponentsScreen'
 import ListScreen from './src/screens/ListScreen'
+import ImageScreen from './src/screens/ImageScreen';
+import CounterScreen from './src/screens/CounterScreen';
+import ColorScreen from './src/screens/ColorScreen';
+import ColorScreenV2 from './src/screens/SquareScreen';
 
 const navigator = createStackNavigator(
   {
     Home: HomeScreen,
     Components: ComponentsScreen,
-    List: ListScreen
+    List: ListScreen,
+    Image: ImageScreen,
+    Counter: CounterScreen,
+    Color: ColorScreen,
+    ColorV2: ColorScreenV2
   }, // where you place components
   {
-    initialRouteName: "List", // tells navigator which component to show first
+    initialRouteName: "Home", // tells navigator which component to show first
     defaultNavigationOptions: {
       title: "App",
     },
