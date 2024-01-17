@@ -6,7 +6,7 @@ import ListScreen from './src/screens/ListScreen'
 import ImageScreen from './src/screens/ImageScreen';
 import CounterScreen from './src/screens/CounterScreen';
 import ColorScreen from './src/screens/ColorScreen';
-import ColorScreenV2 from './src/screens/SquareScreen';
+import SquareScreen from './src/screens/SquareScreen';
 
 const navigator = createStackNavigator(
   {
@@ -16,7 +16,7 @@ const navigator = createStackNavigator(
     Image: ImageScreen,
     Counter: CounterScreen,
     Color: ColorScreen,
-    ColorV2: ColorScreenV2
+    SquareScreen: SquareScreen
   }, // where you place components
   {
     initialRouteName: "Home", // tells navigator which component to show first
