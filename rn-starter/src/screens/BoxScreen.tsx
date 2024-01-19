@@ -11,28 +11,25 @@ const BoxScreen = () => {
 
 const styles = StyleSheet.create({
     viewStyle: {
-        borderWidth: 1,
-        borderColor: 'black'
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     viewOneStyle: {
         height: 100,
         width: 100,
         backgroundColor: 'pink',
-        alignSelf: 'flex-start'
     },
     viewTwoStyle: {
         height: 100,
         width: 100,
         backgroundColor: 'green',
-        alignSelf: 'center',
-        bottom: 20
+        top: 80
     },
     viewThreeStyle: {
         height: 100,
         width: 100,
         backgroundColor: 'purple',
         alignSelf:'flex-end',
-        position: 'absolute'
     }
 });
 
