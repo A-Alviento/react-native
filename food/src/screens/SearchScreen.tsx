@@ -15,7 +15,7 @@ const SearchScreen = () => {
         })
     }
 
-    return <View>
+    return <View style={{ flex: 1 }}>
         <SearchBar 
             term={term} 
             onTermChange={(newTerm) => setTerm(newTerm)} // if your callback function just calls a single function pasing the arguments into it, can just do this
