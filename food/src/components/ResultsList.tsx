@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import { withNavigation } from 'react-navigation';
 import { result } from '../api/yelp';
 import ResultDetail from './ResultDetail';
-import { navProp } from '../types/type'
+import { NavigationStackProp } from "react-navigation-stack";
 
-const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation?: navProp['navigation'] }) => {
+const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation: NavigationStackProp }) => {
     return <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <FlatList
@@ -15,7 +15,7 @@ const ResultsList = ({ title, results, navigation } : { title: string, results: 
             keyExtractor = {(result) => result.id}
             renderItem = {({ item }) => {
                 return (
-                    <TouchableOpacity onPress={() => navigation?.navigate('ResultsShow')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', { id: item.id })}>
                         <ResultDetail result={item} />
                     </TouchableOpacity>
                 )
