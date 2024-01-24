@@ -6,6 +6,10 @@ import ResultDetail from './ResultDetail';
 import { NavigationStackProp } from "react-navigation-stack";
 
 const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation: NavigationStackProp }) => {
+    if (!results.length) {
+        return null;
+    }
+    
     return <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <FlatList
