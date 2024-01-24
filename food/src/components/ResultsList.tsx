@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { result } from '../api/yelp';
 import ResultDetail from './ResultDetail';
-import { navProp } from '../screens/SearchScreen';
+import { navProp } from '../types/type'
 
-const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation: navProp['navigation'] }) => {
+const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation?: navProp['navigation'] }) => {
     return <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <FlatList
@@ -14,7 +15,7 @@ const ResultsList = ({ title, results, navigation } : { title: string, results: 
             keyExtractor = {(result) => result.id}
             renderItem = {({ item }) => {
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
+                    <TouchableOpacity onPress={() => navigation?.navigate('ResultsShow')}>
                         <ResultDetail result={item} />
                     </TouchableOpacity>
                 )
@@ -35,4 +36,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ResultsList; 
+export default withNavigation(ResultsList); 

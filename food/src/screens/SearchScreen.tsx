@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import { NavigationStackProp } from 'react-navigation-stack';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
-type RootStackParamList = {
-    Search: undefined;
-    ResultsShow: undefined;
-};
 
-export interface navProp {
-    navigation: NavigationStackProp<RootStackParamList, 'Search'>;
-}
-
-
-const SearchScreen = ({ navigation }: navProp) => {
+const SearchScreen = () => {
     const [term, setTerm] = useState('');
     const [searchApi, results, errorMessage] = useResults();
     
@@ -38,17 +28,14 @@ const SearchScreen = ({ navigation }: navProp) => {
             <ResultsList 
                 results={filterResultsByPrice('$')} 
                 title="Cost Effective"
-                navigation={navigation}
             />
             <ResultsList 
                 results={filterResultsByPrice('$$')} 
                 title="Bit Pricier"
-                navigation={navigation}
             />
             <ResultsList 
                 results={filterResultsByPrice('$$$')} 
                 title="Big Spender"
-                navigation={navigation}
             />
         </ScrollView>
     </>
