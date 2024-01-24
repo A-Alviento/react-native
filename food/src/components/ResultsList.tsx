@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { result } from '../api/yelp';
 import ResultDetail from './ResultDetail';
+import { navProp } from '../screens/SearchScreen';
 
-const ResultsList = ({ title, results } : { title: string, results: result[] }) => {
+const ResultsList = ({ title, results, navigation } : { title: string, results: result[], navigation: navProp['navigation'] }) => {
     return <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <FlatList
@@ -12,7 +13,11 @@ const ResultsList = ({ title, results } : { title: string, results: result[] }) 
             data = {results}
             keyExtractor = {(result) => result.id}
             renderItem = {({ item }) => {
-                return <ResultDetail result={item} />
+                return (
+                    <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
+                        <ResultDetail result={item} />
+                    </TouchableOpacity>
+                )
             }}
         />
     </View>
