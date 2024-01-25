@@ -1,15 +1,16 @@
-import React from 'react';
-import { propTypes, blogPostsType } from '../types';
+import React, { useState } from 'react';
+import { propTypes, blogPostsType, blogPostsContext } from '../types';
 
-const BlogContext = React.createContext<blogPostsType[]>([]);
+const BlogContext = React.createContext<blogPostsContext>({} as blogPostsContext);
 
 export const BlogProvider: React.FC<propTypes> = ({ children }) => {
-    const blogPosts = [
-        { title: 'Blog Post #1' },
-        { title: 'Blog Post #2' }
-    ];
+    const [blogPosts, setBlogPosts] = useState<blogPostsType[]>([]);
 
-    return <BlogContext.Provider value={blogPosts}>
+    const addBlogPost = () => {
+        setBlogPosts([ ...blogPosts, { title: `Blog Post #${blogPosts.length + 1}` } ]);
+    }
+
+    return <BlogContext.Provider value={{ data: blogPosts, addBlogPost: addBlogPost }}>
         {children}
     </BlogContext.Provider>;
 };

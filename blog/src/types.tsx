@@ -7,3 +7,8 @@ export type propTypes = {
 export type blogPostsType = {
     title: string;
 };
+
+export type blogPostsContext = {
+    data: blogPostsType[],
+    addBlogPost: () => void
+};
