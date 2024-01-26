@@ -11,7 +11,7 @@ export type blogPostsType = {
 
 export type blogPostsActionType = {
     type: string,
-    payload?: number;
+    payload: { id?: number, title?: string, content?: string };
 };
 
 export type blogPostsContext = {
