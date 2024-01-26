@@ -10,7 +10,7 @@ const blogReducer = (state: blogPostsType[], action: blogPostsActionType) => {
             return [...state, 
                 {
                     id: Math.floor(Math.random() * 9999), 
-                    title: action.payload.title?action.payload.title:`Blog Post #${state.length + 1}`,
+                    title: action.payload.title?action.payload.title:'',
                     content: action.payload.content
                 }];
         default:
@@ -19,8 +19,9 @@ const blogReducer = (state: blogPostsType[], action: blogPostsActionType) => {
 };
 
 const addBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
-    return (title: string, content: string) => {
+    return (title: string, content: string, callback: () => void) => {
         dispatch({ type: 'add_blogpost', payload: { title, content } });
+        callback();
     }
 };
 
