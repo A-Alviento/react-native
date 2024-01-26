@@ -8,6 +8,10 @@ export type blogPostsType = {
     title: string;
 };
 
+export type blogPostsActionType = {
+    type: string;
+};
+
 export type blogPostsContext = {
     data: blogPostsType[],
     addBlogPost: () => void
