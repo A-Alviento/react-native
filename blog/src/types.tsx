@@ -10,7 +10,8 @@ export type blogPostsType = {
 };
 
 export type blogPostsActionType = {
-    type: string;
+    type: string,
+    payload?: number;
 };
 
 export type blogPostsContext = {

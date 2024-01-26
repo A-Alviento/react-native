@@ -6,9 +6,10 @@ import { Feather } from '@expo/vector-icons'
 import { blogPostsType, blogPostsActionType } from '../types';
 
 const IndexScreen = () => {
-  const { state, addBlogPost }: 
+  const { state, addBlogPost, deleteBlogPost }: 
         { state: blogPostsType[], 
-          addBlogPost: any } 
+          addBlogPost: () => void,
+          deleteBlogPost: (id:number) => void } 
           = useContext(Context)
 
   return (
@@ -20,7 +21,7 @@ const IndexScreen = () => {
         renderItem={({ item }) => {
             return <View style={styles.row}>
               <Text style={styles.title}>{item.title} - {item.id}</Text>
-              <TouchableOpacity onPress={() => console.log(item.id)}>
+              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
                 <Feather style={styles.icon} name="trash" />
               </TouchableOpacity>
             </View>
