@@ -5,6 +5,7 @@ export type propTypes = {
 };
 
 export type blogPostsType = {
+    id: number,
     title: string;
 };
 
