@@ -11,7 +11,7 @@ const blogReducer = (state: blogPostsType[], action: blogPostsActionType) => {
                 {
                     id: Math.floor(Math.random() * 9999), 
                     title: action.payload.title?action.payload.title:'',
-                    content: action.payload.content
+                    content: action.payload.content?action.payload.content:''
                 }];
         default:
             return state;
@@ -31,4 +31,4 @@ const deleteBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
     }
 };
 
-export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost: addBlogPost, deleteBlogPost: deleteBlogPost }, [])
+export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost: addBlogPost, deleteBlogPost: deleteBlogPost }, [{id: 1, title: 'TEST POST', content: 'TEST CONTENT'}])
