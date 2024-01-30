@@ -8,11 +8,11 @@ import BlogPostForm from '../component/BlogPostForm';
 const EditScreen = ({ navigation }: {navigation: NavigationStackProp}) => {
     const id = navigation.getParam('id');
 
-    const { state, addBlogPost }: { state: blogPostsType[], addBlogPost: (title: string, content: string, callback: () => void) => void} = useContext(Context);
+    const { state, editBlogPost }: { state: blogPostsType[], editBlogPost: (id: number, title: string, content: string, callback?: () => void) => void} = useContext(Context);
     const blogPost = state.find((blogPost) => blogPost.id === id)
 
-    return <BlogPostForm onSubmit={(title, content) => {
-        console.log(title, content);
+    return <BlogPostForm onSubmit={(title: string, content: string) => {
+        editBlogPost(id, title, content, () => navigation.pop());
     }} initialValues={{ title: blogPost?.title??'', content: blogPost?.content??'' }}/>
 };
 

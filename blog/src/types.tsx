@@ -5,9 +5,9 @@ export type propTypes = {
 };
 
 export type blogPostsType = {
-    id: number,
-    title: string;
-    content: string;
+    id?: number,
+    title?: string;
+    content?: string;
 };
 
 export type blogPostsActionType = {

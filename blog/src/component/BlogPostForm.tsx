@@ -5,7 +5,7 @@ import { NavigationStackProp } from "react-navigation-stack";
 
 
 
-const BlogPostForm = ({ onSubmit, initialValues }: { onSubmit: (title: string, content:string) => void, initialValues: {title: string, content: string}}) => {
+const BlogPostForm = ({ onSubmit, initialValues }: { onSubmit: any, initialValues: {title: string, content: string}}) => {
     const [title, setTitle] = useState(initialValues.title);
     const [content, setContent] = useState(initialValues.content);
 
