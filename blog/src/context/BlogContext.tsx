@@ -1,18 +1,13 @@
-import React from 'react';
 import { blogPostsType, blogPostsActionType } from '../types';
 import createDataContext from './createDataContext';
+import jsonServer from '../api/jsonServer';
 
 const blogReducer = (state: blogPostsType[], action: blogPostsActionType) => {
     switch (action.type) {
+        case 'get_blogposts':
+            return action.payload;
         case 'delete_blogpost':
             return state.filter((blogpost) => blogpost.id !== action.payload.id);
-        case 'add_blogpost':
-            return [...state, 
-                {
-                    id: Math.floor(Math.random() * 9999), 
-                    title: action.payload.title?action.payload.title:'',
-                    content: action.payload.content?action.payload.content:''
-                }];
         case 'edit_blogpost':
             return state.map((blogPost) => {
                 return blogPost.id === action.payload.id ? action.payload : blogPost;
@@ -22,9 +17,19 @@ const blogReducer = (state: blogPostsType[], action: blogPostsActionType) => {
     }
 };
 
+const getBlogPosts = (dispatch: React.Dispatch<blogPostsActionType>) => {
+    return async () => {
+        const response = await jsonServer.get('/blogposts');
+        const data: blogPostsType[] = response.data;
+
+        dispatch({ type: 'get_blogposts', payload: data})
+    }
+};
+
 const addBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
-    return (title: string, content: string, callback: () => void) => {
-        dispatch({ type: 'add_blogpost', payload: { title, content } });
+    return async (title: string, content: string, callback: () => void) => {
+        await jsonServer.post('/blogposts', { title, content })
+
         if (callback) {
             callback();
         }
@@ -32,13 +37,14 @@ const addBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
 };
 
 const deleteBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
-    return (id: number) => {
-        dispatch({ type: 'delete_blogpost',  payload: { id }})
+    return async (id: string) => {
+        await jsonServer.delete(`/blogposts/${id}`)
+        dispatch({ type: 'delete_blogpost', payload: {id} })
     }
 };
 
 const editBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
-    return (id: number, title: string, content: string, callback: () => void) => {
+    return (id: string, title: string, content: string, callback: () => void) => {
         dispatch({ type: 'edit_blogpost', payload: { id, title, content } });
         if (callback) {
             callback();
@@ -46,4 +52,4 @@ const editBlogPost = (dispatch: React.Dispatch<blogPostsActionType>) => {
     };
 };
 
-export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost: addBlogPost, deleteBlogPost: deleteBlogPost, editBlogPost: editBlogPost }, [{id: 1, title: 'TEST POST', content: 'TEST CONTENT'}])
+export const { Context, Provider } = createDataContext(blogReducer, { addBlogPost: addBlogPost, deleteBlogPost: deleteBlogPost, editBlogPost: editBlogPost, getBlogPosts: getBlogPosts }, [])

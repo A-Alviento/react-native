@@ -5,17 +5,18 @@ export type propTypes = {
 };
 
 export type blogPostsType = {
-    id?: number,
-    title?: string;
-    content?: string;
-};
-
-export type blogPostsActionType = {
-    type: string,
-    payload: { id?: number, title?: string, content?: string };
+    id: string,
+    title: string;
+    content: string;
 };
 
 export type blogPostsContext = {
     data: blogPostsType[],
     addBlogPost: () => void
 };
+
+export type blogPostsActionType = 
+    | { type: 'get_blogposts'; payload: blogPostsType[] }
+    | { type: 'add_blogpost'; payload: { title: string, content: string } }
+    | { type: 'delete_blogpost'; payload: { id: string } }
+    | { type: 'edit_blogpost'; payload: { id: string, title: string, content: string } };
