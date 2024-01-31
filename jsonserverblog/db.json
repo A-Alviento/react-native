@@ -1,3 +1,9 @@
 {
-    "blogposts": []
+  "blogposts": [
+    {
+      "title": "API first Post",
+      "content": "This is a post created using the API",
+      "id": "kdj9"
+    }
+  ]
 }
