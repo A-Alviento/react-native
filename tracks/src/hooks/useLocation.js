@@ -35,7 +35,13 @@ export default (shouldTrack, callback) => {
       }
       setSubscriber(null);
     }
-  }, [shouldTrack]); // if empty array, only run startWatching once when component is first rendered
+
+    return () => {
+      if (subscriber) {
+        subscriber.remove();
+      }
+    };
+  }, [shouldTrack, callback]); // if empty array, only run startWatching once when component is first rendered
   // if shouldTrack in array, run startWatching whenever shouldTrack changes
 
   return [err];
