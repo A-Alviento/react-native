@@ -13,7 +13,6 @@ const TrackListScreen = ({ navigation }) => {
     <>
       {/* can condense this to onWillFocus={fetchTracks}  */}
       <NavigationEvents onWillFocus={() => fetchTracks()} />
-      <Text style={{ fontSize: 48 }}>TrackListScreen</Text>
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}
@@ -36,6 +35,10 @@ const TrackListScreen = ({ navigation }) => {
       />
     </>
   );
+};
+
+TrackListScreen.navigationOptions = {
+  title: "Tracks",
 };
 
 const styles = StyleSheet.create({});
